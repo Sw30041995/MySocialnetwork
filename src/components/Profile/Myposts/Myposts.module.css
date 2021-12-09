@@ -1,0 +1,14 @@
+.posts button {
+    background-color: #8e8888;
+    border-radius: 10px;
+}
+
+.posts button:hover {
+    background-color: white;
+}
+
+.posts textarea {
+    width: 380px;
+    height: 70px;
+    resize: none;
+}

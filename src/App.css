@@ -1,0 +1,26 @@
+.app-wrapper {
+  display: grid;
+  grid-template-areas:
+  'h h'
+  'n c';
+  grid-gap: 10px;
+  grid-template-rows: 60px 100vh;
+  grid-template-columns: 2fr 8fr;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: silver;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: white;
+}

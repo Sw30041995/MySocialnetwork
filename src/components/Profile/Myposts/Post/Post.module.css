@@ -1,0 +1,9 @@
+.postItem img {
+    width: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.postItem {
+    margin-top: 20px;
+}
