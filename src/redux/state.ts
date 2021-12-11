@@ -1,4 +1,4 @@
-type PostType = {
+export type PostType = {
     id: number
     message: string
     likesCount: number
@@ -14,7 +14,7 @@ type MessageType = {
     message: string
 }
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
 }
 
@@ -23,12 +23,12 @@ type DialogsPageType = {
     messages: Array<MessageType>
 }
 
-type RootState = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
-let state: RootState = {
+let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hello. My name Ivan.', likesCount: 13},

@@ -3,7 +3,7 @@ import style from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 
-export const Dialogs = () => {
+export const Dialogs = (props) => {
 
     let dialogsElements = dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
 

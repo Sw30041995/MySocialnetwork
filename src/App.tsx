@@ -15,8 +15,8 @@ export const App = () => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/profile/*' element={<Profile posts={state.profilePage}/>}/>
-                        <Route path='/dialogs/*' element={<Dialogs/>}/>
+                        <Route path='/profile/*' element={<Profile profilePage={state.profilePage}/>}/>
+                        <Route path='/dialogs/*' element={<Dialogs dialogsPage={state.dialogsPage}/>}/>
                     </Routes>
                 </div>
             </div>

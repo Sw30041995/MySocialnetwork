@@ -3,23 +3,18 @@ import style from './Profile.module.css';
 import {Myposts} from "./Myposts/Myposts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PageCover} from "./PageCover/PageCover";
+import {ProfilePageType} from './../../redux/state';
 
-type PostType = {
-    id: number
-    message: string
-    likesCount: number
+type ProfilePropsType = {
+    profilePage: ProfilePageType
 }
 
-type ProfilePageType = {
-    posts: Array<PostType>
-}
-
-export const Profile = (props: Array<PostType>) => {
+export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <PageCover/>
             <ProfileInfo/>
-            <Myposts posts={props.posts}/>
+            <Myposts posts={props.profilePage.posts}/>
         </div>
     );
 }
