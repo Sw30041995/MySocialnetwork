@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import React from "react";
 
 type PropsType = {
-    name: string,
+    name: string
     id: number
 }
 
