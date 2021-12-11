@@ -1,17 +1,7 @@
 import React from "react";
 import style from './Post.module.css';
 
-// type ProfilePageType = {
-//     posts: Array<PostsType>
-// }
-//
-// type PostsType = {
-//     id: number
-//     message: string
-//     likesCount: number
-// }
-
-export const Post = (props: any) => {
+export const Post = (props) => {
     return (
         <div className={style.postItem}>
             <img
