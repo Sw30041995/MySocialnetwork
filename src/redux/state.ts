@@ -24,9 +24,14 @@ export type DialogsPageType = {
     messages: Array<MessageType>
 }
 
+export type SidebarType = {
+    friends: Array<DialogType>
+}
+
 type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    sidebar: SidebarType
 }
 
 export let state: RootStateType = {
@@ -71,6 +76,25 @@ export let state: RootStateType = {
             {id: 3, message: 'i have good computer'},
             {id: 4, message: 'bla bla'},
             {id: 5, message: 'ho ho ho'}
+        ]
+    },
+    sidebar: {
+        friends: [
+            {
+                id: 1,
+                avatarUrl: 'https://rlab.me/wp-content/uploads/2017/09/sozdat-avatar-dlya-youtube-sharg.png',
+                name: 'Ivan'
+            },
+            {
+                id: 2,
+                avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYIMmE0bLUSDD7LII20c-b06qmFH_ZWUqUQA&usqp=CAU',
+                name: 'Evgeniy'
+            },
+            {
+                id: 3,
+                avatarUrl: 'https://image.freepik.com/free-vector/man-avatar-portrait-of-a-man-minimalist-flat-illustration_186332-435.jpg',
+                name: 'Yaroslav'
+            }
         ]
     }
 }
