@@ -21,8 +21,8 @@ export const Navbar = (props: PropsType) => {
                 <li><NavLink to="/music">Music</NavLink></li>
                 <li><NavLink to="/settings">Settings</NavLink></li>
             </ul>
+            <div className={style.friendsHeader}>Friends</div>
             <div className={style.friends}>
-                Friends
                 {friendsElements}
             </div>
         </nav>
