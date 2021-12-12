@@ -5,7 +5,7 @@ import {Header} from "./components/Header/Header";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import state from "./redux/state";
+import {state} from "./redux/state";
 
 export const App = () => {
     return (
@@ -17,6 +17,7 @@ export const App = () => {
                     <Routes>
                         <Route path='/profile/*' element={<Profile profilePage={state.profilePage}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs dialogsPage={state.dialogsPage}/>}/>
+
                     </Routes>
                 </div>
             </div>

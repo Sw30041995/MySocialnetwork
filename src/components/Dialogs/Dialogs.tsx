@@ -12,7 +12,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
 
-    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message}/>);
+    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>);
 
     return (
         <div className={style.dialogs}>

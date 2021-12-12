@@ -28,7 +28,7 @@ type RootStateType = {
     dialogsPage: DialogsPageType
 }
 
-let state: RootStateType = {
+export let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hello. My name Ivan.', likesCount: 13},
@@ -53,5 +53,3 @@ let state: RootStateType = {
         ]
     }
 }
-
-export default state;
