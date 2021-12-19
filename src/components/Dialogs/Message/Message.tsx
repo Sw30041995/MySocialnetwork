@@ -10,5 +10,6 @@ export const Message = (props: PropsType) => {
         <div className={style.message}>
             {props.message}
         </div>
+
     );
 }

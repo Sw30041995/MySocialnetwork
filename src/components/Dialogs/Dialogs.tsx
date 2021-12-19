@@ -10,6 +10,13 @@ type DialogsPropsType = {
 
 export const Dialogs = (props: DialogsPropsType) => {
 
+    let newMessageElement = React.createRef<HTMLTextAreaElement>()
+
+    let sendMessage = () => {
+        let newMessageText = newMessageElement.current?.value
+        alert(newMessageText)
+    }
+
     let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem avatarUrl={d.avatarUrl} name={d.name} id={d.id}/>);
 
     let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>);
@@ -21,6 +28,8 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={style.messages}>
                 {messagesElements}
+                <textarea ref={newMessageElement}></textarea>
+                <button onClick={sendMessage}>Send a message</button>
             </div>
         </div>
     );
