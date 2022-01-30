@@ -17,6 +17,7 @@ type MessageType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string
 }
 
 export type DialogsPageType = {
@@ -28,7 +29,7 @@ export type SidebarType = {
     friends: Array<DialogType>
 }
 
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
@@ -40,7 +41,8 @@ export let state: RootStateType = {
             {id: 1, message: 'Hello. My name Ivan.', likesCount: 13},
             {id: 2, message: 'Goodbye', likesCount: 9},
             {id: 3, message: 'heeey', likesCount: 7}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [
@@ -97,4 +99,26 @@ export let state: RootStateType = {
             }
         ]
     }
+}
+
+let rerenderEntireTree = () => {}
+
+export const addPost = () => {
+    const newPost: PostType = {
+        id: 4,
+        message: state.profilePage.newPostText,
+        likesCount: 0
+    }
+    state.profilePage.posts.unshift(newPost)
+    state.profilePage.newPostText = ''
+    rerenderEntireTree()
+}
+
+export const changeNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
+
+export const subscribe = (observer: () => void) => {
+    rerenderEntireTree = observer
 }

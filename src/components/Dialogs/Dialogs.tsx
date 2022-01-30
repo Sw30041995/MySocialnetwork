@@ -28,7 +28,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={style.messages}>
                 {messagesElements}
-                <textarea ref={newMessageElement}></textarea>
+                <textarea ref={newMessageElement}/>
                 <button onClick={sendMessage}>Send a message</button>
             </div>
         </div>
