@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Myposts.module.css";
 import {Post} from "./Post/Post";
-import {ActionType, addPostActionCreator, changeNewPostTextActionCreator, PostType} from '../../../redux/state';
+import {ActionType, addPostCreator, changeNewPostTextCreator, PostType} from '../../../redux/state';
 
 type MypostsPropsType = {
     posts: Array<PostType>
@@ -11,17 +11,17 @@ type MypostsPropsType = {
 
 export const Myposts = (props: MypostsPropsType) => {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => props.dispatch(addPostActionCreator())
+    const addPost = () => props.dispatch(addPostCreator())
 
     const onChangePostTextHandler = () => {
         if (newPostElement.current) {
-            props.dispatch(changeNewPostTextActionCreator(newPostElement.current.value))
+            props.dispatch(changeNewPostTextCreator(newPostElement.current.value))
         }
     }
 
-    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
+    const postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     return (
         <div className={style.posts}>

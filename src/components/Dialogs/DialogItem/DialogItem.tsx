@@ -5,7 +5,7 @@ import React from "react";
 type PropsType = {
     name: string
     avatarUrl: string
-    id: number
+    id: string
 }
 
 export const DialogItem = (props: PropsType) => {

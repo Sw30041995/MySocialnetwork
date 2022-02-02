@@ -1,17 +1,21 @@
+import {v1} from "uuid";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+
 export type PostType = {
-    id: number
+    id: string
     message: string
     likesCount: number
 }
 
 type DialogType = {
-    id: number
+    id: string
     avatarUrl: string
     name: string
 }
 
-type MessageType = {
-    id: number
+export type MessageType = {
+    id: string
     message: string
 }
 
@@ -23,6 +27,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 
 export type SidebarType = {
@@ -43,76 +48,84 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 }
 
-export type ActionType = AddPostActionType | ChangeNewPostTextType
+export type ActionType = AddPostActionType | ChangeNewPostTextType | SendMessageActionType | ChangeNewMessageTextType
 
 type AddPostActionType = {
     type: 'ADD-POST'
 }
 type ChangeNewPostTextType = {
     type: 'CHANGE-NEW-POST-TEXT'
-    newText: string
+    newPostText: string
+}
+type SendMessageActionType = {
+    type: "SEND-MESSAGE"
+}
+type ChangeNewMessageTextType = {
+    type: 'CHANGE-NEW-MESSAGE-TEXT'
+    newMessageText: string
 }
 
 export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {id: 1, message: 'Hello. My name Ivan.', likesCount: 13},
-                {id: 2, message: 'Goodbye', likesCount: 9},
-                {id: 3, message: 'heeey', likesCount: 7}
+                {id: v1(), message: 'Hello. My name Ivan.', likesCount: 13},
+                {id: v1(), message: 'Its okay', likesCount: 9},
+                {id: v1(), message: 'heeey', likesCount: 7}
             ],
             newPostText: ''
         },
         dialogsPage: {
             dialogs: [
                 {
-                    id: 1,
+                    id: v1(),
                     avatarUrl: 'https://rlab.me/wp-content/uploads/2017/09/sozdat-avatar-dlya-youtube-sharg.png',
                     name: 'Ivan'
                 },
                 {
-                    id: 2,
+                    id: v1(),
                     avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYIMmE0bLUSDD7LII20c-b06qmFH_ZWUqUQA&usqp=CAU',
                     name: 'Evgeniy'
                 },
                 {
-                    id: 3,
+                    id: v1(),
                     avatarUrl: 'https://image.freepik.com/free-vector/man-avatar-portrait-of-a-man-minimalist-flat-illustration_186332-435.jpg',
                     name: 'Yaroslav'
                 },
                 {
-                    id: 4,
+                    id: v1(),
                     avatarUrl: 'https://cdn.w600.comps.canstockphoto.ru/%D0%BA%D1%80%D0%B0%D1%81%D0%B8%D0%B2%D1%8B%D0%B9-%D0%B0%D0%B2%D0%B0%D1%82%D0%B0%D1%80-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B8%D0%BF%D0%B0%D1%80%D1%82_csp41056957.jpg',
                     name: 'Alexey'
                 },
                 {
-                    id: 5,
+                    id: v1(),
                     avatarUrl: 'https://w1.pngwing.com/pngs/664/825/png-transparent-social-media-icons-avatar-male-man-female-face-facial-hair-facial-expression.png',
                     name: 'Anastasiya'
                 }
             ],
             messages: [
-                {id: 1, message: 'Hello'},
-                {id: 2, message: 'I learn JS and React'},
-                {id: 3, message: 'i have good computer'},
-                {id: 4, message: 'bla bla'},
-                {id: 5, message: 'ho ho ho'}
-            ]
+                {id: v1(), message: 'Hello'},
+                {id: v1(), message: 'I learn JS and React'},
+                {id: v1(), message: 'i have good computer'},
+                {id: v1(), message: 'bla bla'},
+                {id: v1(), message: 'ho ho ho'}
+            ],
+            newMessageText: ''
         },
         sidebar: {
             friends: [
                 {
-                    id: 1,
+                    id: v1(),
                     avatarUrl: 'https://rlab.me/wp-content/uploads/2017/09/sozdat-avatar-dlya-youtube-sharg.png',
                     name: 'Ivan'
                 },
                 {
-                    id: 2,
+                    id: v1(),
                     avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYIMmE0bLUSDD7LII20c-b06qmFH_ZWUqUQA&usqp=CAU',
                     name: 'Evgeniy'
                 },
                 {
-                    id: 3,
+                    id: v1(),
                     avatarUrl: 'https://image.freepik.com/free-vector/man-avatar-portrait-of-a-man-minimalist-flat-illustration_186332-435.jpg',
                     name: 'Yaroslav'
                 }
@@ -130,26 +143,20 @@ export const store: StoreType = {
     },
 
     dispatch(action: ActionType) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostType = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.unshift(newPost)
-            this._state.profilePage.newPostText = ''
-            this._rerenderEntireTree(this._state)
-        } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._rerenderEntireTree(this._state)
-        }
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.dialogsPage, action)
+        this._rerenderEntireTree(this._state)
     }
 }
 
-export const addPostActionCreator = (): AddPostActionType => ({type: "ADD-POST"})
-export const changeNewPostTextActionCreator = (newText: string): ChangeNewPostTextType => ({
+export const addPostCreator = (): AddPostActionType => ({type: "ADD-POST"})
+export const changeNewPostTextCreator = (newPostText: string): ChangeNewPostTextType => ({
     type: "CHANGE-NEW-POST-TEXT",
-    newText: newText
+    newPostText: newPostText
 })
 
-//aa
+export const sendMessageCreator = (): SendMessageActionType => ({type: 'SEND-MESSAGE'})
+export const changeNewMessageTextCreator = (newMessageText: string): ChangeNewMessageTextType => ({
+    type: "CHANGE-NEW-MESSAGE-TEXT",
+    newMessageText: newMessageText
+})
