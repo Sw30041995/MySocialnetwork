@@ -3,7 +3,8 @@ import React from "react";
 import {Myposts} from "./Myposts/Myposts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PageCover} from "./PageCover/PageCover";
-import {ActionType, ProfilePageType} from '../../redux/state';
+import {ActionType} from "../../redux/redux-store";
+import {ProfilePageType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
@@ -19,5 +20,5 @@ export const Profile = (props: ProfilePropsType) => {
                      newPostText={props.profilePage.newPostText}
                      dispatch={props.dispatch}/>
         </div>
-    );
+    )
 }
