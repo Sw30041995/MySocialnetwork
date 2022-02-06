@@ -1,27 +1,22 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent} from "react";
 import style from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {changeNewMessageTextAC, DialogsPageType, sendMessageAC} from '../../redux/dialogs-reducer';
-import {ActionType} from "../../redux/redux-store";
+import {DialogsPageType} from '../../redux/dialogs-reducer';
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionType) => void
+    newMessageText: string
+    sendMessage: () => void
+    changeMessageText: (newMessageText: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const sendMessage = () => props.dispatch(sendMessageAC())
+    const sendMessage = () => props.sendMessage
 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeNewMessageTextAC(e.currentTarget.value))
-    }
-
-    const onKeyEnterHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.ctrlKey && e.code === 'Enter') {
-            sendMessage()
-        }
+        props.changeMessageText(e.currentTarget.value)
     }
 
     const dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} avatarUrl={d.avatarUrl}
@@ -38,7 +33,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 {messagesElements}
             </div>
             <div>
-                <textarea value={props.dialogsPage.newMessageText} onKeyPress={onKeyEnterHandler}
+                <textarea value={props.dialogsPage.newMessageText}
                           onChange={onChangeMessageTextHandler}/>
                 <button onClick={sendMessage}>Send a message</button>
             </div>

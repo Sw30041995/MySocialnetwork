@@ -80,7 +80,6 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTyp
         default:
             return state
     }
-    return state
 }
 
 export const sendMessageAC = (): SendMessageActionType => ({type: 'SEND-MESSAGE'})
