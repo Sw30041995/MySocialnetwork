@@ -1,0 +1,17 @@
+.container {
+    width: 700px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.data {
+    width: 50%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,20 +1,13 @@
 import React from "react";
 import style from "./Myposts.module.css";
-import {PostType} from "../../../redux/profile-reducer";
 import {Post} from "./Post/Post";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
-type MypostsPropsType = {
-    posts: Array<PostType>
-    newPostText: string
-    addPost: () => void
-    changePostText: (newPostText: string) => void
-}
-
-export const MyPosts = (props: MypostsPropsType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => props.addPost
+    const addPost = () => props.addPost()
 
     const onChangePostTextHandler = () => {
         if (newPostElement.current) {

@@ -4,7 +4,7 @@ import {ActionType} from "./redux-store";
 export type SendMessageActionType = {
     type: "SEND-MESSAGE"
 }
-export type ChangeNewMessageTextType = {
+export type ChangeNewMessageTextActionType = {
     type: 'CHANGE-NEW-MESSAGE-TEXT'
     newMessageText: string
 }
@@ -21,7 +21,7 @@ export type DialogType = {
     name: string
 }
 
-type MessageType = {
+export type MessageType = {
     id: string
     message: string
 }
@@ -67,23 +67,16 @@ const initialState: DialogsPageType = {
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
     switch (action.type) {
         case 'SEND-MESSAGE':
-            const newMessage: MessageType = {
-                id: v1(),
-                message: state.newMessageText
-            }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state
+            return {...state, messages: [...state.messages, {id: v1(), message: state.newMessageText}], newMessageText: ''}
         case 'CHANGE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newMessageText
-            return state
+            return {...state, newMessageText: action.newMessageText}
         default:
             return state
     }
 }
 
 export const sendMessageAC = (): SendMessageActionType => ({type: 'SEND-MESSAGE'})
-export const changeNewMessageTextAC = (newMessageText: string): ChangeNewMessageTextType => ({
+export const changeNewMessageTextAC = (newMessageText: string): ChangeNewMessageTextActionType => ({
     type: "CHANGE-NEW-MESSAGE-TEXT",
     newMessageText: newMessageText
 })
