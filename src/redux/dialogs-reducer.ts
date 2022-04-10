@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {ActionType} from "./redux-store";
+
+type ActionType = SendMessageActionType | ChangeNewMessageTextActionType
 
 export type SendMessageActionType = {
     type: "SEND-MESSAGE"
@@ -64,10 +65,14 @@ const initialState: DialogsPageType = {
     newMessageText: ''
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
     switch (action.type) {
         case 'SEND-MESSAGE':
-            return {...state, messages: [...state.messages, {id: v1(), message: state.newMessageText}], newMessageText: ''}
+            return {
+                ...state,
+                messages: [...state.messages, {id: v1(), message: state.newMessageText}],
+                newMessageText: ''
+            }
         case 'CHANGE-NEW-MESSAGE-TEXT':
             return {...state, newMessageText: action.newMessageText}
         default:
@@ -80,5 +85,3 @@ export const changeNewMessageTextAC = (newMessageText: string): ChangeNewMessage
     type: "CHANGE-NEW-MESSAGE-TEXT",
     newMessageText: newMessageText
 })
-
-export default dialogsReducer

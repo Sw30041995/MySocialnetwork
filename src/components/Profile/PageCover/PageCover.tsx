@@ -5,7 +5,7 @@ export const PageCover = () => {
     return (
         <div className={style.pageCover}>
             <img
-                src="https://focus.ua/static/storage/thumbs/920x465/d/a2/efafe234-e4acc1ce0ecce47e575ba79703bcba2d.jpg?v=3749_1"
+                src="https://media-cdn.tripadvisor.com/media/photo-s/1b/69/5d/5a/tramonto-a-sangineto.jpg"
                 alt=""/>
         </div>
     );

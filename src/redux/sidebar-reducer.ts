@@ -1,6 +1,9 @@
 import {v1} from "uuid";
-import {ActionType} from "./redux-store";
 import {DialogType} from "./dialogs-reducer";
+
+export type ActionType = {
+
+}
 
 export type SidebarType = {
     friends: Array<DialogType>
@@ -26,8 +29,6 @@ const initialState: SidebarType = {
     ]
 }
 
-const sidebarReducer = (state: SidebarType = initialState, action: ActionType): SidebarType => {
+export const sidebarReducer = (state: SidebarType = initialState, action: ActionType): SidebarType => {
     return state
 }
-
-export default sidebarReducer
